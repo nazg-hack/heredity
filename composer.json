@@ -1,0 +1,38 @@
+{
+  "name": "ytake/heredity",
+  "description": "Middleware Dispatcher For Hack",
+  "keywords": [
+    "hhvm",
+    "hack"
+  ],
+  "homepage": "https://github.com/ytake/heredity",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Yuuki Takezawa",
+      "email": "yuuki.takezawa@comnect.jp.net"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "hhvm": ">=3.19.0",
+    "hhvm/hhvm-autoload": "^1.5",
+    "http-interop/http-server-middleware": "^1.0",
+    "http-interop/http-server-handler": "^1.0",
+    "psr/http-message": "^1.0",
+    "hack-psr/psr7-http-message-hhi": "^1.0.0",
+    "ytake/psr-http-handlers-hhi": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0",
+    "91carriage/phpunit-hhi": "^5.7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ytake\\Heredity\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}

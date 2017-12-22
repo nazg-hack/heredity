@@ -22,17 +22,26 @@
     "http-interop/http-server-middleware": "^1.0",
     "http-interop/http-server-handler": "^1.0",
     "psr/http-message": "^1.0",
+    "psr/container": "^1.0",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",
-    "ytake/psr-http-handlers-hhi": "dev-master"
+    "ytake/psr-http-handlers-hhi": "^1.0.1",
+    "ytake/psr-container-hhi": "^1.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.0",
-    "91carriage/phpunit-hhi": "^5.7.1"
+    "91carriage/phpunit-hhi": "^5.7.1",
+    "zendframework/zend-diactoros": "^1.6.1",
+    "ytake/hh-container": "^0.4.0"
   },
   "autoload": {
     "psr-4": {
       "Ytake\\Heredity\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
   },
   "minimum-stability": "stable"
 }

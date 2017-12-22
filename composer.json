@@ -3,7 +3,14 @@
   "description": "Middleware Dispatcher For Hack",
   "keywords": [
     "hhvm",
-    "hack"
+    "hack",
+    "http",
+    "response",
+    "middleware",
+    "request",
+    "psr",
+    "psr-7",
+    "psr-15"
   ],
   "homepage": "https://github.com/ytake/heredity",
   "license": [

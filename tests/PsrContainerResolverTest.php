@@ -6,10 +6,13 @@ use Ytake\Heredity\MiddlewareStack;
 use Ytake\HHContainer\FactoryContainer;
 
 class PsrContainerResolverTest extends TestCase {
-  
+
   public function testShouldReturnMiddlewareInstance(): void {
     $container = new FactoryContainer();
-    $container->set(MockMiddleware::class, $container ==> new MockMiddleware());
+    $container->set(
+      MockMiddleware::class,
+      $container ==> new MockMiddleware(),
+    );
     $resolver = new PsrContainerResolver($container);
     $class = $resolver->resolve(MockMiddleware::class);
     $this->assertInstanceOf(MockMiddleware::class, $class);
@@ -17,10 +20,13 @@ class PsrContainerResolverTest extends TestCase {
 
   public function testFunctionalMiddlewareStackWithContainer(): void {
     $container = new FactoryContainer();
-    $container->set(MockMiddleware::class, $container ==> new MockMiddleware());
+    $container->set(
+      MockMiddleware::class,
+      $container ==> new MockMiddleware(),
+    );
     $stack = new MiddlewareStack(
-      [MockMiddleware::class], 
-      new PsrContainerResolver($container)
+      [MockMiddleware::class],
+      new PsrContainerResolver($container),
     );
     $this->assertInstanceOf(MiddlewareStack::class, $stack);
     $this->assertFalse($stack->isEmpty());

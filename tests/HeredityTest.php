@@ -7,20 +7,23 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class HeredityTest extends TestCase {
 
-  public function testFunctionalMiddlewareRunner():void {
+  public function testFunctionalMiddlewareRunner(): void {
     $heredity = new Heredity(new MiddlewareStack([]));
-    $response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+    $response = $heredity->process(
+      ServerRequestFactory::fromGlobals(),
+      new SimpleRequestHandler(),
+    );
     $content = $response->getBody()->getContents();
     $decode = json_decode($content);
     $this->assertCount(0, $decode);
 
     $heredity = new Heredity(
-      new MiddlewareStack([
-        MockMiddleware::class,
-        MockMiddleware::class
-      ])
+      new MiddlewareStack([MockMiddleware::class, MockMiddleware::class]),
     );
-    $response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+    $response = $heredity->process(
+      ServerRequestFactory::fromGlobals(),
+      new SimpleRequestHandler(),
+    );
     $content = $response->getBody()->getContents();
     $decode = json_decode($content);
     $this->assertCount(2, $decode);

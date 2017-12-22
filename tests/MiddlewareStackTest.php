@@ -15,11 +15,9 @@ class MiddlewareStackTest extends TestCase {
   }
 
   public function testStackShift(): void {
-    $stack = new MiddlewareStack([
-      MockMiddleware::class, 
-      FakeMiddleware::class, 
-      FakeMiddleware::class
-    ]);
+    $stack = new MiddlewareStack(
+      [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class],
+    );
     $this->assertInstanceOf(MiddlewareStack::class, $stack);
     $this->assertFalse($stack->isEmpty());
     $middleware = $stack->shift();
@@ -34,21 +32,15 @@ class MiddlewareStackTest extends TestCase {
   }
 
   public function testShouldReturnMiddlewareStackLayer(): void {
-    $middlewares = [
-      MockMiddleware::class, 
-      FakeMiddleware::class, 
-      FakeMiddleware::class
-    ];
+    $middlewares =
+      [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class];
     $stack = new MiddlewareStack($middlewares);
     $this->assertEquals($middlewares, $stack->layer()->toArray());
   }
 
   public function testShouldReturnSkipedMiddleware(): void {
-    $middlewares = [
-      MockMiddleware::class, 
-      FakeMiddleware::class, 
-      FakeMiddleware::class
-    ];
+    $middlewares =
+      [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class];
     $stack = new MiddlewareStack($middlewares);
     $stack->cancel(0);
     $this->assertNotEquals($middlewares, $stack->layer()->toArray());

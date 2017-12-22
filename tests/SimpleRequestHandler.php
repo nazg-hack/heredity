@@ -9,7 +9,7 @@ class SimpleRequestHandler implements RequestHandlerInterface {
 
   public function handle(ServerRequestInterface $request): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);
-    if(count($header)) {
+    if (count($header)) {
       return new JsonResponse($header);
     }
     return new JsonResponse([]);

@@ -1,5 +1,20 @@
 <?hh // strict
 
+/**
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the MIT license.
+ *
+ * Copyright (c) 2017 Yuuki Takezawa
+ *
+ */
 namespace Ytake\Heredity;
 
 use Psr\Container\ContainerInterface;
@@ -8,26 +23,33 @@ use Ytake\Heredity\Exception\MiddlewareResolvingException;
 use Interop\Http\Server\MiddlewareInterface;
 
 class PsrContainerResolver implements Resolvable {
-  
+
   public function __construct(protected ContainerInterface $container) {}
 
   public function resolve(mixed $middleware): MiddlewareInterface {
-    if(is_string($middleware)) {
-      if($this->container->has($middleware)) {
+    if (is_string($middleware)) {
+      if ($this->container->has($middleware)) {
         try {
           $instance = $this->container->get($middleware);
-          if($instance instanceof MiddlewareInterface) {
-            return $instance;  
+          if ($instance instanceof MiddlewareInterface) {
+            return $instance;
           }
-        } catch(\Exception $e) {
-          if($e instanceof NotFoundExceptionInterface) {
-            throw new MiddlewareResolvingException(sprintf('Identifier "%s" is not binding.', get_class($middleware)));
+        } catch (\Exception $e) {
+          if ($e instanceof NotFoundExceptionInterface) {
+            throw new MiddlewareResolvingException(
+              sprintf(
+                'Identifier "%s" is not binding.',
+                get_class($middleware),
+              ),
+            );
           }
           throw $e;
         }
       }
     }
 
-    throw new MiddlewareResolvingException(sprintf('Identifier "%s" is not binding.', get_class($middleware)));
+    throw new MiddlewareResolvingException(
+      sprintf('Identifier "%s" is not binding.', get_class($middleware)),
+    );
   }
 }

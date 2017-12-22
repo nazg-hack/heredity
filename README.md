@@ -1,6 +1,8 @@
 # heredity
 Middleware Dispatcher For Hack
 
+[![Build Status](https://travis-ci.org/ytake/heredity.svg?branch=master)](https://travis-ci.org/ytake/heredity)
+
 ## install
 
 ```bash

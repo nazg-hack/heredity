@@ -63,9 +63,10 @@ use Zend\Diactoros\ServerRequestFactory;
 $heredity = new Heredity(
     new MiddlewareStack([
       SimpleMiddleware::class
-    ])
+    ]),
+    new SimpleRequestHandler()
   );
-$response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+$response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```
 
@@ -87,8 +88,9 @@ $heredity = new Heredity(
   new MiddlewareStack(
     [SimpleMiddleware::class],
     new PsrContainerResolver($container)
-  );
+  ),
+  new SimpleRequestHandler()
 );
-$response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+$response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```

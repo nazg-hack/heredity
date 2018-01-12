@@ -12,7 +12,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  *
- * Copyright (c) 2017 Yuuki Takezawa
+ * Copyright (c) 2017-2018 Yuuki Takezawa
  *
  */
 namespace Ytake\Heredity;
@@ -22,15 +22,27 @@ use Interop\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class Heredity implements MiddlewareInterface {
+<<__ConsistentConstruct>>
+class Heredity implements RequestHandlerInterface {
 
-  public function __construct(protected MiddlewareStack $stack) {}
+  public function __construct(
+    protected MiddlewareStack $stack,
+    protected ?RequestHandlerInterface $handler = null
+  ) {}
 
-  public function process(
-    ServerRequestInterface $request,
-    RequestHandlerInterface $handler,
+  public function handle(ServerRequestInterface $request): ResponseInterface {
+    if ($this->stack->isEmpty()) {
+      if ($this->handler) {
+        return $this->handler->handle($request);
+      }
+    }
+    return $this->processor($this->stack->shift(), $request);
+  }
+
+  protected function processor(
+    MiddlewareInterface $middleware,
+    ServerRequestInterface $request
   ): ResponseInterface {
-    $dispatchHandler = new Dispatcher($this->stack, $handler);
-    return $dispatchHandler->handle($request);
+    return $middleware->process($request, $this);
   }
 }

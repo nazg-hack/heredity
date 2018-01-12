@@ -6,16 +6,8 @@ Middleware Dispatcher For Hack
 ## install
 
 ```bash
-$ hhvm -c php7.ini $(which composer) require ytake/heredity
-```
-
-### example php7.ini
-
-```
-[hhvm]
-hhvm.jit=false
-hhvm.php7.all=1
-hhvm.hack.lang.auto_typecheck=0
+$ hhvm -d xdebug.enable=0 -d hhvm.jit=0 -d hhvm.php7.all=1 -d hhvm.hack.lang.auto_typecheck=0 \
+ $(which composer) require ytake/heredity
 ```
 
 ## Usage
@@ -71,9 +63,10 @@ use Zend\Diactoros\ServerRequestFactory;
 $heredity = new Heredity(
     new MiddlewareStack([
       SimpleMiddleware::class
-    ])
+    ]),
+    new SimpleRequestHandler()
   );
-$response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+$response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```
 
@@ -95,8 +88,9 @@ $heredity = new Heredity(
   new MiddlewareStack(
     [SimpleMiddleware::class],
     new PsrContainerResolver($container)
-  );
+  ),
+  new SimpleRequestHandler()
 );
-$response = $heredity->process(ServerRequestFactory::fromGlobals(), new SimpleRequestHandler());
+$response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```

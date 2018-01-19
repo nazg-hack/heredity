@@ -1,7 +1,7 @@
 <?hh // strict
 
 use PHPUnit\Framework\TestCase;
-use Ytake\Heredity\InstanceResolver;
+use Nazg\Heredity\InstanceResolver;
 
 class InstanceResolverTest extends TestCase {
 

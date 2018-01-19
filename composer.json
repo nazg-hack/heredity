@@ -12,7 +12,7 @@
     "psr-7",
     "psr-15"
   ],
-  "homepage": "https://github.com/ytake/heredity",
+  "homepage": "https://github.com/nazg-hack/heredity",
   "license": [
     "MIT"
   ],
@@ -42,7 +42,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Ytake\\Heredity\\": "src/"
+      "Nazg\\Heredity\\": "src/"
     }
   },
   "autoload-dev": {

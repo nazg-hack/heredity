@@ -15,7 +15,7 @@
  * Copyright (c) 2017-2018 Yuuki Takezawa
  *
  */
-namespace Ytake\Heredity;
+namespace Nazg\Heredity;
 
 use Interop\Http\Server\MiddlewareInterface;
 

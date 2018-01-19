@@ -15,6 +15,6 @@
  * Copyright (c) 2017-2018 Yuuki Takezawa
  *
  */
-namespace Ytake\Heredity\Exception;
+namespace Nazg\Heredity\Exception;
 
 class MiddlewareResolvingException extends \LogicException {}

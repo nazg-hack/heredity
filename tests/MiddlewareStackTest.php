@@ -1,11 +1,11 @@
 <?hh // strict
 
 use PHPUnit\Framework\TestCase;
-use Ytake\Heredity\MiddlewareStack;
+use Nazg\Heredity\MiddlewareStack;
 
 class MiddlewareStackTest extends TestCase {
   /**
-   * @expectedException \Ytake\Heredity\Exception\MiddlewareResolvingException
+   * @expectedException \Nazg\Heredity\Exception\MiddlewareResolvingException
    */
   public function testShouldThrowMiddlewareResolvingException(): void {
     $stack = new MiddlewareStack(['aaa', 'bbb', 'ccc']);

@@ -1,13 +1,13 @@
 # heredity
 Middleware Dispatcher For Hack
 
-[![Build Status](https://travis-ci.org/ytake/heredity.svg?branch=master)](https://travis-ci.org/ytake/heredity)
+[![Build Status](https://travis-ci.org/nazg-hack/heredity.svg?branch=master)](https://travis-ci.org/nazg-hack/heredity)
 
 ## install
 
 ```bash
 $ hhvm -d xdebug.enable=0 -d hhvm.jit=0 -d hhvm.php7.all=1 -d hhvm.hack.lang.auto_typecheck=0 \
- $(which composer) require ytake/heredity
+ $(which composer) require nazg/heredity
 ```
 
 ## Usage
@@ -56,8 +56,8 @@ class SimpleMiddleware implements MiddlewareInterface {
 #### 3. Middleware
 
 ```hack
-use Ytake\Heredity\Heredity;
-use Ytake\Heredity\MiddlewareStack;
+use Nazg\Heredity\Heredity;
+use Nazg\Heredity\MiddlewareStack;
 use Zend\Diactoros\ServerRequestFactory;
 
 $heredity = new Heredity(
@@ -75,9 +75,9 @@ $response = $heredity->process(ServerRequestFactory::fromGlobals());
 example. [ytake/hh-container](https://github.com/ytake/hh-container)
 
 ```hack
-use Ytake\Heredity\Heredity;
-use Ytake\Heredity\MiddlewareStack;
-use Ytake\Heredity\PsrContainerResolver;
+use Nazg\Heredity\Heredity;
+use Nazg\Heredity\MiddlewareStack;
+use Nazg\Heredity\PsrContainerResolver;
 use Ytake\HHContainer\FactoryContainer;
 use Zend\Diactoros\ServerRequestFactory;
 

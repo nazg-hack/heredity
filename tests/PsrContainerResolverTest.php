@@ -1,8 +1,8 @@
 <?hh // strict
 
 use PHPUnit\Framework\TestCase;
-use Ytake\Heredity\PsrContainerResolver;
-use Ytake\Heredity\MiddlewareStack;
+use Nazg\Heredity\PsrContainerResolver;
+use Nazg\Heredity\MiddlewareStack;
 use Ytake\HHContainer\FactoryContainer;
 
 class PsrContainerResolverTest extends TestCase {

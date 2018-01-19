@@ -1,8 +1,8 @@
 <?hh
 
 use PHPUnit\Framework\TestCase;
-use Ytake\Heredity\Heredity;
-use Ytake\Heredity\MiddlewareStack;
+use Nazg\Heredity\Heredity;
+use Nazg\Heredity\MiddlewareStack;
 use Zend\Diactoros\ServerRequestFactory;
 
 class HeredityTest extends TestCase {

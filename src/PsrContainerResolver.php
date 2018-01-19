@@ -15,11 +15,11 @@
  * Copyright (c) 2017-2018 Yuuki Takezawa
  *
  */
-namespace Ytake\Heredity;
+namespace Nazg\Heredity;
 
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Ytake\Heredity\Exception\MiddlewareResolvingException;
+use Nazg\Heredity\Exception\MiddlewareResolvingException;
 use Interop\Http\Server\MiddlewareInterface;
 
 class PsrContainerResolver implements Resolvable {

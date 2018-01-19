@@ -1,5 +1,5 @@
 {
-  "name": "ytake/heredity",
+  "name": "nazg/heredity",
   "description": "Middleware Dispatcher For Hack",
   "keywords": [
     "hhvm",

@@ -2,8 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 use Nazg\Heredity\MiddlewareStack;
+use NazgHeredityTest\Middleware\MockMiddleware;
+use NazgHeredityTest\Middleware\FakeMiddleware;
 
-class MiddlewareStackTest extends TestCase {
+final class MiddlewareStackTest extends TestCase {
   /**
    * @expectedException \Nazg\Heredity\Exception\MiddlewareResolvingException
    */

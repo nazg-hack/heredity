@@ -3,9 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use Nazg\Heredity\PsrContainerResolver;
 use Nazg\Heredity\MiddlewareStack;
+use NazgHeredityTest\Middleware\MockMiddleware;
 use Ytake\HHContainer\FactoryContainer;
 
-class PsrContainerResolverTest extends TestCase {
+final class PsrContainerResolverTest extends TestCase {
 
   public function testShouldReturnMiddlewareInstance(): void {
     $container = new FactoryContainer();

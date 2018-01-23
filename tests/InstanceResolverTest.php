@@ -2,8 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 use Nazg\Heredity\InstanceResolver;
+use NazgHeredityTest\Middleware\MockMiddleware;
 
-class InstanceResolverTest extends TestCase {
+final class InstanceResolverTest extends TestCase {
 
   public function testShouldReturnMiddlewareInstance(): void {
     $resolver = new InstanceResolver();

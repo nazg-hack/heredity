@@ -1,11 +1,12 @@
 <?hh
 
-use Interop\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\JsonResponse;
+use NazgHeredityTest\Middleware\MockMiddleware;
 
-class SimpleRequestHandler implements RequestHandlerInterface {
+final class SimpleRequestHandler implements RequestHandlerInterface {
 
   public function handle(ServerRequestInterface $request): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);

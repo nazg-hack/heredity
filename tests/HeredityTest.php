@@ -4,8 +4,9 @@ use PHPUnit\Framework\TestCase;
 use Nazg\Heredity\Heredity;
 use Nazg\Heredity\MiddlewareStack;
 use Zend\Diactoros\ServerRequestFactory;
+use NazgHeredityTest\Middleware\MockMiddleware;
 
-class HeredityTest extends TestCase {
+final class HeredityTest extends TestCase {
 
   public function testFunctionalMiddlewareRunner(): void {
     $heredity = new Heredity(

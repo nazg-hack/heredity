@@ -1,11 +1,13 @@
 <?hh // strict
 
-use Interop\Http\Server\MiddlewareInterface;
+namespace NazgHeredityTest\Middleware;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Interop\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class FakeMiddleware implements MiddlewareInterface {
+final class FakeMiddleware implements MiddlewareInterface {
 
   public function process(
     ServerRequestInterface $request,

@@ -1,11 +1,13 @@
 <?hh // strict
 
-use Interop\Http\Server\MiddlewareInterface;
+namespace NazgHeredityTest\Middleware;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Interop\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class MockMiddleware implements MiddlewareInterface {
+final class MockMiddleware implements MiddlewareInterface {
 
   const string MOCK_HEADER = 'x-testing-call-count';
 

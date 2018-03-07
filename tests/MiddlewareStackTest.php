@@ -6,15 +6,6 @@ use NazgHeredityTest\Middleware\MockMiddleware;
 use NazgHeredityTest\Middleware\FakeMiddleware;
 
 final class MiddlewareStackTest extends TestCase {
-  /**
-   * @expectedException \Nazg\Heredity\Exception\MiddlewareResolvingException
-   */
-  public function testShouldThrowMiddlewareResolvingException(): void {
-    $stack = new MiddlewareStack(['aaa', 'bbb', 'ccc']);
-    $this->assertInstanceOf(MiddlewareStack::class, $stack);
-    $this->assertFalse($stack->isEmpty());
-    $stack->shift();
-  }
 
   public function testStackShift(): void {
     $stack = new MiddlewareStack(

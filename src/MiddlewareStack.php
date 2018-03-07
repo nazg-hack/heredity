@@ -22,11 +22,11 @@ use Psr\Http\Server\MiddlewareInterface;
 class MiddlewareStack {
 
   protected Resolvable $resolver;
-  protected Vector<mixed> $queue = Vector {};
+  protected Vector<classname<MiddlewareInterface>> $queue = Vector {};
   protected int $position = 0;
 
   public function __construct(
-    Traversable<mixed> $queue,
+    Traversable<classname<MiddlewareInterface>> $queue,
     ?Resolvable $resolver = null,
   ) {
     $this->queue = new Vector($queue);
@@ -44,11 +44,11 @@ class MiddlewareStack {
     return $this->resolver->resolve($current);
   }
 
-  public function layer(): ImmVector<mixed> {
+  public function layer(): ImmVector<classname<MiddlewareInterface>> {
     return $this->queue->immutable();
   }
 
-  public function cancel(int $index): Vector<mixed> {
+  public function cancel(int $index): Vector<classname<MiddlewareInterface>> {
     return $this->queue->removeKey($index);
   }
 }

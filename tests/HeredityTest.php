@@ -10,7 +10,7 @@ final class HeredityTest extends TestCase {
 
   public function testFunctionalMiddlewareRunner(): void {
     $heredity = new Heredity(
-      new MiddlewareStack([]), 
+      new MiddlewareStack([]),
       new SimpleRequestHandler()
     );
     $response = $heredity->handle(

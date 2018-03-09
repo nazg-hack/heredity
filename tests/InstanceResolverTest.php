@@ -8,7 +8,7 @@ final class InstanceResolverTest extends TestCase {
 
   public function testShouldReturnMiddlewareInstance(): void {
     $resolver = new InstanceResolver();
-    $class = $resolver->resolve(new MockMiddleware());
+    $class = $resolver->resolve(MockMiddleware::class);
     $this->assertInstanceOf(MockMiddleware::class, $class);
 
     $resolver = new InstanceResolver();

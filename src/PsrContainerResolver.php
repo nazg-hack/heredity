@@ -26,25 +26,11 @@ class PsrContainerResolver implements Resolvable {
 
   public function __construct(protected ContainerInterface $container) {}
 
-  public function resolve(mixed $middleware): MiddlewareInterface {
-    if (is_string($middleware)) {
-      if ($this->container->has($middleware)) {
-        try {
-          $instance = $this->container->get($middleware);
-          if ($instance instanceof MiddlewareInterface) {
-            return $instance;
-          }
-        } catch (\Exception $e) {
-          if ($e instanceof NotFoundExceptionInterface) {
-            throw new MiddlewareResolvingException(
-              sprintf(
-                'Identifier "%s" is not binding.',
-                $middleware,
-              ),
-            );
-          }
-          throw $e;
-        }
+  public function resolve(classname<MiddlewareInterface> $middleware): MiddlewareInterface {
+    if ($this->container->has($middleware)) {
+      $instance = $this->container->get($middleware);
+      if ($instance instanceof MiddlewareInterface) {
+        return $instance;
       }
     }
 

@@ -21,5 +21,5 @@ use Psr\Http\Server\MiddlewareInterface;
 
 interface Resolvable {
 
-  public function resolve(mixed $middleware): MiddlewareInterface;
+  public function resolve(classname<MiddlewareInterface> $middleware): MiddlewareInterface;
 }

@@ -24,16 +24,8 @@ use Psr\Http\Server\MiddlewareInterface;
 
 class InstanceResolver implements Resolvable {
 
-  public function resolve(mixed $middleware): MiddlewareInterface {
-    try {
-      $ref = new ReflectionClass($middleware);
-      return $ref->newInstance();
-    } catch (ReflectionException $e) {
-      throw new MiddlewareResolvingException(
-        $e->getMessage(),
-        $e->getCode(),
-        $e,
-      );
-    }
+  public function resolve(classname<MiddlewareInterface> $middleware): MiddlewareInterface {
+    $ref = new ReflectionClass($middleware);
+    return $ref->newInstance();
   }
 }

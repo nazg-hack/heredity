@@ -14,13 +14,13 @@ final class MiddlewareStackTest extends TestCase {
     $this->assertInstanceOf(MiddlewareStack::class, $stack);
     $this->assertFalse($stack->isEmpty());
     $middleware = $stack->shift();
+    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
+    $this->assertFalse($stack->isEmpty());
+    $middleware = $stack->shift();
+    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
+    $this->assertFalse($stack->isEmpty());
+    $middleware = $stack->shift();
     $this->assertInstanceOf(MockMiddleware::class, $middleware);
-    $this->assertFalse($stack->isEmpty());
-    $middleware = $stack->shift();
-    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
-    $this->assertFalse($stack->isEmpty());
-    $middleware = $stack->shift();
-    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
     $this->assertTrue($stack->isEmpty());
   }
 

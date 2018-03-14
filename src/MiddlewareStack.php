@@ -23,7 +23,6 @@ class MiddlewareStack {
 
   protected Resolvable $resolver;
   protected Vector<classname<MiddlewareInterface>> $queue = Vector {};
-  protected int $position = 0;
 
   public function __construct(
     Traversable<classname<MiddlewareInterface>> $queue,
@@ -38,8 +37,11 @@ class MiddlewareStack {
     return $this->queue->isEmpty();
   }
 
-  public function shift(): MiddlewareInterface {
+  public function reverse(): void {
     $this->queue->reverse();
+  }
+
+  public function shift(): MiddlewareInterface {
     $current = $this->queue->pop();
     return $this->resolver->resolve($current);
   }

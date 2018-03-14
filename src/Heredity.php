@@ -28,14 +28,18 @@ class Heredity implements RequestHandlerInterface {
   public function __construct(
     protected MiddlewareStack $stack,
     protected ?RequestHandlerInterface $handler = null
-  ) {}
+  ) {
+    $stack->reverse();
+  }
 
   public function handle(ServerRequestInterface $request): ResponseInterface {
     if ($this->stack->isEmpty()) {
       if ($this->handler) {
         return $this->handler->handle($request);
       }
+      throw new Exception\MiddlewareNotFoundException('Middleware Class Not Found.');
     }
+
     return $this->processor($this->stack->shift(), $request);
   }
 

@@ -35,7 +35,7 @@ class PsrContainerResolver implements Resolvable {
     }
 
     throw new MiddlewareResolvingException(
-      sprintf('Identifier "%s" is not binding.', $middleware),
+      \sprintf('Identifier "%s" is not binding.', $middleware),
     );
   }
 }

@@ -30,7 +30,7 @@ class MiddlewareStack {
   ) {
     $this->queue = new Vector($queue);
     $this->resolver =
-      (is_null($resolver)) ? new InstanceResolver() : $resolver;
+      (\is_null($resolver)) ? new InstanceResolver() : $resolver;
   }
 
   public function isEmpty(): bool {

@@ -17,4 +17,4 @@
  */
 namespace Nazg\Heredity\Exception;
 
-class MiddlewareNotFoundException extends \RuntimeException {}
+final class MiddlewareNotFoundException extends \RuntimeException {}

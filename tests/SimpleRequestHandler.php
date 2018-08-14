@@ -1,10 +1,10 @@
 <?hh
 
-use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response\JsonResponse;
-use NazgHeredityTest\Middleware\MockMiddleware;
+use type Psr\Http\Server\RequestHandlerInterface;
+use type Psr\Http\Message\ServerRequestInterface;
+use type Psr\Http\Message\ResponseInterface;
+use type Zend\Diactoros\Response\JsonResponse;
+use type NazgHeredityTest\Middleware\MockMiddleware;
 
 final class SimpleRequestHandler implements RequestHandlerInterface {
 

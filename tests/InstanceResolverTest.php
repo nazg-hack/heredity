@@ -1,8 +1,8 @@
 <?hh // strict
 
-use PHPUnit\Framework\TestCase;
-use Nazg\Heredity\InstanceResolver;
-use NazgHeredityTest\Middleware\MockMiddleware;
+use type PHPUnit\Framework\TestCase;
+use type Nazg\Heredity\InstanceResolver;
+use type NazgHeredityTest\Middleware\MockMiddleware;
 
 final class InstanceResolverTest extends TestCase {
 

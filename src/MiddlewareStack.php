@@ -17,7 +17,8 @@
  */
 namespace Nazg\Heredity;
 
-use Psr\Http\Server\MiddlewareInterface;
+use type Psr\Http\Server\MiddlewareInterface;
+use function is_null;
 
 class MiddlewareStack {
 
@@ -29,8 +30,7 @@ class MiddlewareStack {
     ?Resolvable $resolver = null,
   ) {
     $this->queue = new Vector($queue);
-    $this->resolver =
-      (\is_null($resolver)) ? new InstanceResolver() : $resolver;
+    $this->resolver = (is_null($resolver)) ? new InstanceResolver() : $resolver;
   }
 
   public function isEmpty(): bool {

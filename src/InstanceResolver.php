@@ -17,10 +17,8 @@
  */
 namespace Nazg\Heredity;
 
-use ReflectionException;
-use ReflectionClass;
-use Nazg\Heredity\Exception\MiddlewareResolvingException;
-use Psr\Http\Server\MiddlewareInterface;
+use type ReflectionClass;
+use type Psr\Http\Server\MiddlewareInterface;
 
 class InstanceResolver implements Resolvable {
 

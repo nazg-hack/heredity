@@ -17,10 +17,10 @@
  */
 namespace Nazg\Heredity;
 
-use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Server\RequestHandlerInterface;
+use type Psr\Http\Server\MiddlewareInterface;
+use type Psr\Http\Message\ServerRequestInterface;
+use type Psr\Http\Message\ResponseInterface;
 
 <<__ConsistentConstruct>>
 class Heredity implements RequestHandlerInterface {

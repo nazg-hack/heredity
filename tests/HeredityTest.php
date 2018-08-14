@@ -1,10 +1,10 @@
 <?hh
 
-use PHPUnit\Framework\TestCase;
-use Nazg\Heredity\Heredity;
-use Nazg\Heredity\MiddlewareStack;
-use Zend\Diactoros\ServerRequestFactory;
-use NazgHeredityTest\Middleware\MockMiddleware;
+use type PHPUnit\Framework\TestCase;
+use type Nazg\Heredity\Heredity;
+use type Nazg\Heredity\MiddlewareStack;
+use type Zend\Diactoros\ServerRequestFactory;
+use type NazgHeredityTest\Middleware\MockMiddleware;
 
 final class HeredityTest extends TestCase {
 

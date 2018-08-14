@@ -1,9 +1,9 @@
 <?hh // strict
 
-use PHPUnit\Framework\TestCase;
-use Nazg\Heredity\MiddlewareStack;
-use NazgHeredityTest\Middleware\MockMiddleware;
-use NazgHeredityTest\Middleware\FakeMiddleware;
+use type PHPUnit\Framework\TestCase;
+use type Nazg\Heredity\MiddlewareStack;
+use type NazgHeredityTest\Middleware\MockMiddleware;
+use type NazgHeredityTest\Middleware\FakeMiddleware;
 
 final class MiddlewareStackTest extends TestCase {
 

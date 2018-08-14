@@ -1,10 +1,10 @@
 <?hh // strict
 
-use PHPUnit\Framework\TestCase;
-use Nazg\Heredity\PsrContainerResolver;
-use Nazg\Heredity\MiddlewareStack;
-use NazgHeredityTest\Middleware\MockMiddleware;
-use Ytake\HHContainer\FactoryContainer;
+use type PHPUnit\Framework\TestCase;
+use type Nazg\Heredity\PsrContainerResolver;
+use type Nazg\Heredity\MiddlewareStack;
+use type NazgHeredityTest\Middleware\MockMiddleware;
+use type Ytake\HHContainer\FactoryContainer;
 
 final class PsrContainerResolverTest extends TestCase {
 

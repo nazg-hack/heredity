@@ -17,4 +17,4 @@
  */
 namespace Nazg\Heredity\Exception;
 
-class MiddlewareResolvingException extends \LogicException {}
+final class MiddlewareResolvingException extends \LogicException {}

@@ -17,10 +17,11 @@
  */
 namespace Nazg\Heredity;
 
-use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Nazg\Heredity\Exception\MiddlewareResolvingException;
+use type Psr\Container\ContainerInterface;
+use type Psr\Http\Server\MiddlewareInterface;
+use type Nazg\Heredity\Exception\MiddlewareResolvingException;
+
+use function sprintf;
 
 class PsrContainerResolver implements Resolvable {
 
@@ -35,7 +36,7 @@ class PsrContainerResolver implements Resolvable {
     }
 
     throw new MiddlewareResolvingException(
-      \sprintf('Identifier "%s" is not binding.', $middleware),
+      sprintf('Identifier "%s" is not binding.', $middleware),
     );
   }
 }

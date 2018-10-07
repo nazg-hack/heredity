@@ -25,9 +25,13 @@ use function sprintf;
 
 class PsrContainerResolver implements Resolvable {
 
-  public function __construct(protected ContainerInterface $container) {}
+  public function __construct(
+    protected ContainerInterface $container
+  ) {}
 
-  public function resolve(classname<MiddlewareInterface> $middleware): MiddlewareInterface {
+  public function resolve(
+    classname<MiddlewareInterface> $middleware
+  ): MiddlewareInterface {
     if ($this->container->has($middleware)) {
       $instance = $this->container->get($middleware);
       if ($instance instanceof MiddlewareInterface) {

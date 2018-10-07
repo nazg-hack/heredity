@@ -1,12 +1,13 @@
 <?hh
 
-use type PHPUnit\Framework\TestCase;
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Zend\Diactoros\ServerRequestFactory;
 use type NazgHeredityTest\Middleware\MockMiddleware;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class HeredityTest extends TestCase {
+final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareRunner(): void {
     $heredity = new Heredity(
@@ -18,7 +19,7 @@ final class HeredityTest extends TestCase {
     );
     $content = $response->getBody()->getContents();
     $decode = json_decode($content);
-    $this->assertCount(0, $decode);
+    expect($decode)->toBeSame([]);
 
     $heredity = new Heredity(
       new MiddlewareStack([MockMiddleware::class, MockMiddleware::class]),
@@ -29,6 +30,6 @@ final class HeredityTest extends TestCase {
     );
     $content = $response->getBody()->getContents();
     $decode = json_decode($content);
-    $this->assertCount(2, $decode);
+    expect(count($decode))->toBeSame(2);
   }
 }

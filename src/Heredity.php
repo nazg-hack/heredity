@@ -31,7 +31,7 @@ class Heredity implements RequestHandlerInterface {
   ) {
     $stack->reverse();
   }
-
+  
   public function handle(ServerRequestInterface $request): ResponseInterface {
     if ($this->stack->isEmpty()) {
       if ($this->handler) {
@@ -43,6 +43,7 @@ class Heredity implements RequestHandlerInterface {
     return $this->processor($this->stack->shift(), $request);
   }
 
+  <<__RxLocal>>
   protected function processor(
     MiddlewareInterface $middleware,
     ServerRequestInterface $request

@@ -33,6 +33,7 @@ class MiddlewareStack {
     $this->resolver = (is_null($resolver)) ? new InstanceResolver() : $resolver;
   }
 
+  <<__Rx>>
   public function isEmpty(): bool {
     return $this->queue->isEmpty();
   }
@@ -42,10 +43,12 @@ class MiddlewareStack {
   }
 
   public function shift(): MiddlewareInterface {
-    $current = $this->queue->pop();
-    return $this->resolver->resolve($current);
+    return $this->resolver->resolve(
+      $this->queue->pop()
+    );
   }
 
+  <<__Rx>>
   public function layer(): ImmVector<classname<MiddlewareInterface>> {
     return $this->queue->immutable();
   }

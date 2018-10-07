@@ -1,34 +1,35 @@
 <?hh // strict
 
-use type PHPUnit\Framework\TestCase;
 use type Nazg\Heredity\MiddlewareStack;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type NazgHeredityTest\Middleware\FakeMiddleware;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class MiddlewareStackTest extends TestCase {
+final class MiddlewareStackTest extends HackTest {
 
   public function testStackShift(): void {
     $stack = new MiddlewareStack(
       [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class],
     );
-    $this->assertInstanceOf(MiddlewareStack::class, $stack);
-    $this->assertFalse($stack->isEmpty());
+    expect($stack)->toBeInstanceOf(MiddlewareStack::class);
+    expect($stack->isEmpty())->toBeFalse();
     $middleware = $stack->shift();
-    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
-    $this->assertFalse($stack->isEmpty());
+    expect($middleware)->toBeInstanceOf(FakeMiddleware::class);
+    expect($stack->isEmpty())->toBeFalse();
     $middleware = $stack->shift();
-    $this->assertInstanceOf(FakeMiddleware::class, $middleware);
-    $this->assertFalse($stack->isEmpty());
+    expect($middleware)->toBeInstanceOf(FakeMiddleware::class);
+    expect($stack->isEmpty())->toBeFalse();
     $middleware = $stack->shift();
-    $this->assertInstanceOf(MockMiddleware::class, $middleware);
-    $this->assertTrue($stack->isEmpty());
+    expect($middleware)->toBeInstanceOf(MockMiddleware::class);
+    expect($stack->isEmpty())->toBeTrue();
   }
 
   public function testShouldReturnMiddlewareStackLayer(): void {
     $middlewares =
       [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class];
     $stack = new MiddlewareStack($middlewares);
-    $this->assertEquals($middlewares, $stack->layer()->toArray());
+    expect($stack->layer()->toArray())->toBeSame($middlewares);
   }
 
   public function testShouldReturnSkipedMiddleware(): void {
@@ -36,6 +37,6 @@ final class MiddlewareStackTest extends TestCase {
       [MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class];
     $stack = new MiddlewareStack($middlewares);
     $stack->cancel(0);
-    $this->assertNotEquals($middlewares, $stack->layer()->toArray());
+    expect($stack->layer()->toArray())->toNotBeSame($middlewares);
   }
 }

@@ -1,12 +1,13 @@
 <?hh // strict
 
-use type PHPUnit\Framework\TestCase;
 use type Nazg\Heredity\PsrContainerResolver;
 use type Nazg\Heredity\MiddlewareStack;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Ytake\HHContainer\FactoryContainer;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class PsrContainerResolverTest extends TestCase {
+final class PsrContainerResolverTest extends HackTest {
 
   public function testShouldReturnMiddlewareInstance(): void {
     $container = new FactoryContainer();
@@ -16,7 +17,7 @@ final class PsrContainerResolverTest extends TestCase {
     );
     $resolver = new PsrContainerResolver($container);
     $class = $resolver->resolve(MockMiddleware::class);
-    $this->assertInstanceOf(MockMiddleware::class, $class);
+    expect($class)->toBeInstanceOf(MockMiddleware::class);
   }
 
   public function testFunctionalMiddlewareStackWithContainer(): void {
@@ -29,9 +30,9 @@ final class PsrContainerResolverTest extends TestCase {
       [MockMiddleware::class],
       new PsrContainerResolver($container),
     );
-    $this->assertInstanceOf(MiddlewareStack::class, $stack);
-    $this->assertFalse($stack->isEmpty());
+    expect($stack)->toBeInstanceOf(MiddlewareStack::class);
+    expect($stack->isEmpty())->toBeFalse();
     $middleware = $stack->shift();
-    $this->assertInstanceOf(MockMiddleware::class, $middleware);
+    expect($middleware)->toBeInstanceOf(MockMiddleware::class);
   }
 }

@@ -22,7 +22,9 @@ use type Psr\Http\Server\MiddlewareInterface;
 
 class InstanceResolver implements Resolvable {
 
-  public function resolve(classname<MiddlewareInterface> $middleware): MiddlewareInterface {
+  public function resolve(
+    classname<MiddlewareInterface> $middleware
+  ): MiddlewareInterface {
     $ref = new ReflectionClass($middleware);
     return $ref->newInstance();
   }

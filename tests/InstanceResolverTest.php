@@ -1,18 +1,19 @@
 <?hh // strict
 
-use type PHPUnit\Framework\TestCase;
 use type Nazg\Heredity\InstanceResolver;
 use type NazgHeredityTest\Middleware\MockMiddleware;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class InstanceResolverTest extends TestCase {
+final class InstanceResolverTest extends HackTest {
 
   public function testShouldReturnMiddlewareInstance(): void {
     $resolver = new InstanceResolver();
     $class = $resolver->resolve(MockMiddleware::class);
-    $this->assertInstanceOf(MockMiddleware::class, $class);
+    expect($class)->toBeInstanceOf(MockMiddleware::class);
 
     $resolver = new InstanceResolver();
     $class = $resolver->resolve(MockMiddleware::class);
-    $this->assertInstanceOf(MockMiddleware::class, $class);
+    expect($class)->toBeInstanceOf(MockMiddleware::class);
   }
 }

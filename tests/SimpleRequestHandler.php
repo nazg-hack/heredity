@@ -1,8 +1,8 @@
 <?hh
 
-use type Psr\Http\Server\RequestHandlerInterface;
-use type Psr\Http\Message\ServerRequestInterface;
-use type Psr\Http\Message\ResponseInterface;
+use type Ytake\HackHttpServer\RequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Zend\Diactoros\Response\JsonResponse;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 

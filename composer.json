@@ -23,15 +23,12 @@
     }
   ],
   "require": {
-    "hhvm": ">=3.28",
+    "hhvm": ">=3.29",
     "hhvm/hhvm-autoload": "^1.6",
-    "hhvm/hsl": "^3.28",
-    "psr/http-server-middleware": "^1.0",
-    "psr/http-server-handler": "^1.0",
-    "psr/http-message": "^1.0",
+    "hhvm/hsl": "^3.29",
+    "facebook/hack-http-request-response-interfaces": "dev-master",
+    "ytake/hack-http-server-request-handlers-interfaces": "^1.0.0",
     "psr/container": "^1.0",
-    "hack-psr/psr7-http-message-hhi": "^1.0.0",
-    "ytake/psr-http-handlers-hhi": "^1.1.0",
     "ytake/psr-container-hhi": "^1.0.0"
   },
   "require-dev": {

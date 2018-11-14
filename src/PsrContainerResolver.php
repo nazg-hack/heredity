@@ -18,7 +18,7 @@
 namespace Nazg\Heredity;
 
 use type Psr\Container\ContainerInterface;
-use type Psr\Http\Server\MiddlewareInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;
 
 use function sprintf;
@@ -34,7 +34,7 @@ class PsrContainerResolver implements Resolvable {
   ): MiddlewareInterface {
     if ($this->container->has($middleware)) {
       $instance = $this->container->get($middleware);
-      if ($instance instanceof MiddlewareInterface) {
+      if ($instance is MiddlewareInterface) {
         return $instance;
       }
     }

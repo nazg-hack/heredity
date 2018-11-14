@@ -18,7 +18,7 @@
 namespace Nazg\Heredity;
 
 use type ReflectionClass;
-use type Psr\Http\Server\MiddlewareInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
 
 class InstanceResolver implements Resolvable {
 

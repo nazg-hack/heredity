@@ -2,10 +2,10 @@
 
 namespace NazgHeredityTest\Middleware;
 
-use type Psr\Http\Message\ResponseInterface;
-use type Psr\Http\Message\ServerRequestInterface;
-use type Psr\Http\Server\MiddlewareInterface;
-use type Psr\Http\Server\RequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Ytake\HackHttpServer\RequestHandlerInterface;
 
 final class FakeMiddleware implements MiddlewareInterface {
 

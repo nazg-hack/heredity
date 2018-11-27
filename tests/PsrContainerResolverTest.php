@@ -1,6 +1,5 @@
 <?hh // strict
 
-use type Nazg\Heredity\PsrContainerResolver;
 use type Nazg\Heredity\MiddlewareStack;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Ytake\HHContainer\FactoryContainer;

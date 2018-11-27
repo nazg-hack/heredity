@@ -17,10 +17,10 @@
  */
 namespace Nazg\Heredity;
 
-use type Psr\Http\Server\RequestHandlerInterface;
-use type Psr\Http\Server\MiddlewareInterface;
-use type Psr\Http\Message\ServerRequestInterface;
-use type Psr\Http\Message\ResponseInterface;
+use type Ytake\HackHttpServer\RequestHandlerInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 <<__ConsistentConstruct>>
 class Heredity implements RequestHandlerInterface {
@@ -31,7 +31,7 @@ class Heredity implements RequestHandlerInterface {
   ) {
     $stack->reverse();
   }
-  
+
   public function handle(ServerRequestInterface $request): ResponseInterface {
     if ($this->stack->isEmpty()) {
       if ($this->handler) {
@@ -43,7 +43,6 @@ class Heredity implements RequestHandlerInterface {
     return $this->processor($this->stack->shift(), $request);
   }
 
-  <<__RxLocal>>
   protected function processor(
     MiddlewareInterface $middleware,
     ServerRequestInterface $request

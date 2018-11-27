@@ -23,23 +23,18 @@
     }
   ],
   "require": {
-    "hhvm": ">=3.28",
+    "hhvm": ">=3.29",
     "hhvm/hhvm-autoload": "^1.6",
-    "hhvm/hsl": "^3.28",
-    "psr/http-server-middleware": "^1.0",
-    "psr/http-server-handler": "^1.0",
-    "psr/http-message": "^1.0",
-    "psr/container": "^1.0",
-    "hack-psr/psr7-http-message-hhi": "^1.0.0",
-    "ytake/psr-http-handlers-hhi": "^1.1.0",
-    "ytake/psr-container-hhi": "^1.0.0"
+    "hhvm/hsl": "^3.29.0",
+    "facebook/hack-http-request-response-interfaces": "^0.1",
+    "ytake/hack-http-server-request-handlers-interfaces": "^1.0.0"
   },
   "require-dev": {
-    "zendframework/zend-diactoros": "^1.6.1",
     "ytake/hh-container": "^0.5.2",
     "hhvm/hacktest": "^1.0",
-    "facebook/fbexpect": "^2.1.3",
-    "hhvm/hhast": ">=3.28.0"
+    "facebook/fbexpect": "^2.2.0",
+    "hhvm/hhast": "^3.29.0",
+    "ytake/hungrr": "^0.1.1"
   },
   "autoload": {
     "psr-4": {

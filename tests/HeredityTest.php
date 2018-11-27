@@ -1,8 +1,9 @@
-<?hh
+<?hh // strict
 
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
-use type Zend\Diactoros\ServerRequestFactory;
+use type Ytake\Hungrr\ServerRequestFactory;
+use type Ytake\Hungrr\Response;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Facebook\HackTest\HackTest;
 use function Facebook\FBExpect\expect;
@@ -17,7 +18,8 @@ final class HeredityTest extends HackTest {
     $response = $heredity->handle(
       ServerRequestFactory::fromGlobals(),
     );
-    $content = $response->getBody()->getContents();
+    invariant($response is Response, "e");
+    $content = $response->readBody()->rawReadBlocking();
     $decode = json_decode($content);
     expect($decode)->toBeSame([]);
 
@@ -28,7 +30,8 @@ final class HeredityTest extends HackTest {
     $response = $heredity->handle(
       ServerRequestFactory::fromGlobals(),
     );
-    $content = $response->getBody()->getContents();
+    invariant($response is Response, "e");
+    $content = $response->readBody()->rawReadBlocking();
     $decode = json_decode($content);
     expect(count($decode))->toBeSame(2);
   }

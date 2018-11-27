@@ -2,10 +2,10 @@
 
 namespace NazgHeredityTest\Middleware;
 
-use type Psr\Http\Message\ResponseInterface;
-use type Psr\Http\Message\ServerRequestInterface;
-use type Psr\Http\Server\MiddlewareInterface;
-use type Psr\Http\Server\RequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Ytake\HackHttpServer\RequestHandlerInterface;
 
 final class MockMiddleware implements MiddlewareInterface {
 
@@ -15,7 +15,7 @@ final class MockMiddleware implements MiddlewareInterface {
     ServerRequestInterface $request,
     RequestHandlerInterface $handler,
   ): ResponseInterface {
-    $request = $request->withAddedHeader(self::MOCK_HEADER, 1);
+    $request = $request->withAddedHeader(self::MOCK_HEADER, vec["1"]);
     return $handler->handle($request);
   }
 }

@@ -30,7 +30,6 @@
     "ytake/hack-http-server-request-handlers-interfaces": "^1.0.0"
   },
   "require-dev": {
-    "zendframework/zend-diactoros": "^1.6.1",
     "ytake/hh-container": "^0.5.2",
     "hhvm/hacktest": "^1.0",
     "facebook/fbexpect": "^2.2.0",

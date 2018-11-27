@@ -31,7 +31,7 @@ class Heredity implements RequestHandlerInterface {
   ) {
     $stack->reverse();
   }
-  
+
   public function handle(ServerRequestInterface $request): ResponseInterface {
     if ($this->stack->isEmpty()) {
       if ($this->handler) {

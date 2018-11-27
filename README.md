@@ -6,28 +6,33 @@ Middleware Dispatcher For Hack
 ## install
 
 ```bash
-$ hhvm -d xdebug.enable=0 -d hhvm.jit=0 -d hhvm.php7.all=1 -d hhvm.hack.lang.auto_typecheck=0 \
- $(which composer) require nazg/heredity
+$ hhvm $(which composer) require nazg/heredity
 ```
 
 ## Usage
 
 ### Basic
 #### 1. Example Simple Request Handler
+
 ```hack
-use Interop\Http\Server\RequestHandlerInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response\JsonResponse;
+<?hh // strict
 
-class SimpleRequestHandler implements RequestHandlerInterface {
+use type Ytake\HackHttpServer\RequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Ytake\Hungrr\Response;
+use type Ytake\Hungrr\StatusCode;
+use type NazgHeredityTest\Middleware\MockMiddleware;
 
+use function json_encode;
+
+final class SimpleRequestHandler implements RequestHandlerInterface {
   public function handle(ServerRequestInterface $request): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);
-    if(count($header)) {
-      return new JsonResponse($header);
+    if (count($header)) {
+      return new Response(StatusCode::OK, dict[], json_encode($header));
     }
-    return new JsonResponse([]);
+    return new Response(StatusCode::OK, dict[], json_encode([]));
   }
 }
 
@@ -36,15 +41,19 @@ class SimpleRequestHandler implements RequestHandlerInterface {
 #### 2. Creating Middleware
 
 ```hack
+<?hh // strict
 
-use Interop\Http\Server\MiddlewareInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Interop\Http\Server\RequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Ytake\HackHttpServer\RequestHandlerInterface;
 
 class SimpleMiddleware implements MiddlewareInterface {
 
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     // ... do something and return response
     // or call request handler:
     // return $handler->handle($request);
@@ -56,9 +65,11 @@ class SimpleMiddleware implements MiddlewareInterface {
 #### 3. Middleware
 
 ```hack
-use Nazg\Heredity\Heredity;
-use Nazg\Heredity\MiddlewareStack;
-use Zend\Diactoros\ServerRequestFactory;
+<?hh // strict
+
+use type Nazg\Heredity\Heredity;
+use type Nazg\Heredity\MiddlewareStack;
+use type Ytake\Hungrr\ServerRequestFactory;
 
 $heredity = new Heredity(
     new MiddlewareStack([
@@ -70,27 +81,39 @@ $response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```
 
-### Use PSR-11 Containers
+### With Dependency Injection Container 
 
 example. [ytake/hh-container](https://github.com/ytake/hh-container)
 
 ```hack
-use Nazg\Heredity\Heredity;
-use Nazg\Heredity\MiddlewareStack;
-use Nazg\Heredity\PsrContainerResolver;
-use Ytake\HHContainer\FactoryContainer;
-use Zend\Diactoros\ServerRequestFactory;
+<?hh // strict
 
-$container = new FactoryContainer();
-$container->set(SimpleMiddleware::class, $container ==> new SimpleMiddleware());
+use type Psr\Container\ContainerInterface;
+use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Nazg\Heredity\Exception\MiddlewareResolvingException;
+use type Nazg\Heredity\Resolvable;
 
-$heredity = new Heredity(
-  new MiddlewareStack(
-    [SimpleMiddleware::class],
-    new PsrContainerResolver($container)
-  ),
-  new SimpleRequestHandler()
-);
-$response = $heredity->process(ServerRequestFactory::fromGlobals());
+use function sprintf;
 
+class PsrContainerResolver implements Resolvable {
+
+  public function __construct(
+    protected ContainerInterface $container
+  ) {}
+
+  public function resolve(
+    classname<MiddlewareInterface> $middleware
+  ): MiddlewareInterface {
+    if ($this->container->has($middleware)) {
+      $instance = $this->container->get($middleware);
+      if ($instance is MiddlewareInterface) {
+        return $instance;
+      }
+    }
+    throw new MiddlewareResolvingException(
+      sprintf('Identifier "%s" is not binding.', $middleware),
+    );
+  }
+}
 ```
+

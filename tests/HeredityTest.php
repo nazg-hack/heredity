@@ -6,33 +6,35 @@ use type Ytake\Hungrr\ServerRequestFactory;
 use type Ytake\Hungrr\Response;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Facebook\HackTest\HackTest;
+use namespace HH\Lib\Experimental\IO;
 use function Facebook\FBExpect\expect;
 
 final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareRunner(): void {
+    list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
       new MiddlewareStack([]),
-      new SimpleRequestHandler()
+      new SimpleRequestHandler($write)
     );
     $response = $heredity->handle(
-      ServerRequestFactory::fromGlobals(),
+      ServerRequestFactory::fromGlobals($read),
     );
-    invariant($response is Response, "e");
-    $content = $response->readBody()->rawReadBlocking();
+    $content = $read->rawReadBlocking();
     $decode = json_decode($content);
     expect($decode)->toBeSame([]);
+  }
 
+  public function testFunctionalMiddlewareStackRunner(): void {
+    list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
       new MiddlewareStack([MockMiddleware::class, MockMiddleware::class]),
-      new SimpleRequestHandler()
+      new SimpleRequestHandler($write)
     );
     $response = $heredity->handle(
       ServerRequestFactory::fromGlobals(),
     );
-    invariant($response is Response, "e");
-    $content = $response->readBody()->rawReadBlocking();
-    $decode = json_decode($content);
+    $decode = json_decode($read->rawReadBlocking());
     expect(count($decode))->toBeSame(2);
   }
 }

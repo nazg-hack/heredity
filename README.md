@@ -1,17 +1,26 @@
 # heredity
-Middleware Dispatcher For Hack
+
+Middleware Dispatcher For Hack.  
 
 [![Build Status](https://travis-ci.org/nazg-hack/heredity.svg?branch=master)](https://travis-ci.org/nazg-hack/heredity)
+
+PSR-7 HTTP message library Not Supported.  
+Supported Only Hack library.  
+*Required HHVM >= 3.30.0*
+
+- [ytake/hungrr](https://github.com/ytake/hungrr)
+- [usox/hackttp](https://github.com/usox/hackttp)
 
 ## install
 
 ```bash
-$ hhvm $(which composer) require nazg/heredity
+hhvm $(which composer) require nazg/heredity
 ```
 
 ## Usage
 
 ### Basic
+
 #### 1. Example Simple Request Handler
 
 ```hack
@@ -23,19 +32,25 @@ use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Ytake\Hungrr\Response;
 use type Ytake\Hungrr\StatusCode;
 use type NazgHeredityTest\Middleware\MockMiddleware;
-
+use namespace HH\Lib\Experimental\IO;
 use function json_encode;
 
 final class SimpleRequestHandler implements RequestHandlerInterface {
+  
+  public function __construct(
+    private IO\WriteHandle $handle
+  ) {}
+
   public function handle(ServerRequestInterface $request): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);
     if (count($header)) {
-      return new Response(StatusCode::OK, dict[], json_encode($header));
+      $this->handle->rawWriteBlocking(json_encode($header));
+      return new Response($this->handle, StatusCode::OK);
     }
-    return new Response(StatusCode::OK, dict[], json_encode([]));
+    $this->handle->rawWriteBlocking(json_encode([]));
+    return new Response($this->handle, StatusCode::OK);
   }
 }
-
 ```
 
 #### 2. Creating Middleware
@@ -70,18 +85,20 @@ class SimpleMiddleware implements MiddlewareInterface {
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Ytake\Hungrr\ServerRequestFactory;
+use namespace HH\Lib\Experimental\IO;
 
+list($read, $write) = IO\pipe_non_disposable();
 $heredity = new Heredity(
     new MiddlewareStack([
       SimpleMiddleware::class
     ]),
-    new SimpleRequestHandler()
+    new SimpleRequestHandler($write)
   );
 $response = $heredity->process(ServerRequestFactory::fromGlobals());
 
 ```
 
-### With Dependency Injection Container 
+### With Dependency Injection Container
 
 example. [ytake/hh-container](https://github.com/ytake/hh-container)
 
@@ -116,4 +133,3 @@ class PsrContainerResolver implements Resolvable {
   }
 }
 ```
-

@@ -17,8 +17,9 @@
  */
 namespace Nazg\Heredity;
 
-use type Ytake\HackHttpServer\RequestHandlerInterface;
-use type Ytake\HackHttpServer\MiddlewareInterface;
+use type HH\Lib\Experimental\IO\WriteHandle;
+use type Nazg\Http\Server\RequestHandlerInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 
@@ -32,20 +33,24 @@ class Heredity implements RequestHandlerInterface {
     $stack->reverse();
   }
 
-  public function handle(ServerRequestInterface $request): ResponseInterface {
+  public function handle(
+    WriteHandle $writeHandle,
+    ServerRequestInterface $request
+  ): ResponseInterface {
     if ($this->stack->isEmpty()) {
       if ($this->handler is RequestHandlerInterface) {
-        return $this->handler->handle($request);
+        return $this->handler->handle($writeHandle, $request);
       }
       throw new Exception\MiddlewareNotFoundException('Middleware Class Not Found.');
     }
-    return $this->processor($this->stack->shift(), $request);
+    return $this->processor($writeHandle, $this->stack->shift(), $request);
   }
 
   protected function processor(
+    WriteHandle $writeHandle,
     MiddlewareInterface $middleware,
     ServerRequestInterface $request
   ): ResponseInterface {
-    return $middleware->process($request, $this);
+    return $middleware->process($writeHandle, $request, $this);
   }
 }

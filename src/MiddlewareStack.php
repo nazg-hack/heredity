@@ -17,21 +17,14 @@
  */
 namespace Nazg\Heredity;
 
-use type Ytake\HackHttpServer\MiddlewareInterface;
-use function is_null;
+use type Nazg\Http\Server\MiddlewareInterface;
 
 class MiddlewareStack {
 
-  protected Resolvable $resolver;
-  protected Vector<classname<MiddlewareInterface>> $queue = Vector {};
-
   public function __construct(
-    Traversable<classname<MiddlewareInterface>> $queue,
-    ?Resolvable $resolver = null,
-  ) {
-    $this->queue = new Vector($queue);
-    $this->resolver = (is_null($resolver)) ? new InstanceResolver() : $resolver;
-  }
+    protected Vector<classname<MiddlewareInterface>> $queue,
+    protected Resolvable $resolver = new InstanceResolver(),
+  ) {}
 
   <<__Rx>>
   public function isEmpty(): bool {
@@ -50,7 +43,7 @@ class MiddlewareStack {
 
   <<__Rx>>
   public function layer(): ImmVector<classname<MiddlewareInterface>> {
-    return $this->queue->immutable();
+    return $this->queue->toImmVector();
   }
 
   public function cancel(int $index): Vector<classname<MiddlewareInterface>> {

@@ -3,7 +3,6 @@
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Ytake\Hungrr\ServerRequestFactory;
-use type Ytake\Hungrr\Response;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Facebook\HackTest\HackTest;
 use namespace HH\Lib\Experimental\IO;
@@ -14,10 +13,11 @@ final class HeredityTest extends HackTest {
   public function testFunctionalMiddlewareRunner(): void {
     list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
-      new MiddlewareStack([]),
-      new SimpleRequestHandler($write)
+      new MiddlewareStack(Vector{}),
+      new SimpleRequestHandler()
     );
     $response = $heredity->handle(
+      $write,
       ServerRequestFactory::fromGlobals($read),
     );
     $content = $read->rawReadBlocking();
@@ -28,10 +28,11 @@ final class HeredityTest extends HackTest {
   public function testFunctionalMiddlewareStackRunner(): void {
     list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
-      new MiddlewareStack([MockMiddleware::class, MockMiddleware::class]),
-      new SimpleRequestHandler($write)
+      new MiddlewareStack(Vector{MockMiddleware::class, MockMiddleware::class}),
+      new SimpleRequestHandler()
     );
     $response = $heredity->handle(
+      $write,
       ServerRequestFactory::fromGlobals(),
     );
     $decode = json_decode($read->rawReadBlocking());

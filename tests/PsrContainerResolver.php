@@ -1,7 +1,7 @@
 <?hh // strict
 
 use type Psr\Container\ContainerInterface;
-use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;
 use type Nazg\Heredity\Resolvable;
 

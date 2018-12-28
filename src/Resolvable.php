@@ -17,7 +17,7 @@
  */
 namespace Nazg\Heredity;
 
-use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
 
 interface Resolvable {
 

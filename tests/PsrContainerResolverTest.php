@@ -26,7 +26,7 @@ final class PsrContainerResolverTest extends HackTest {
       $container ==> new MockMiddleware(),
     );
     $stack = new MiddlewareStack(
-      [MockMiddleware::class],
+      Vector{MockMiddleware::class},
       new PsrContainerResolver($container),
     );
     expect($stack)->toBeInstanceOf(MiddlewareStack::class);

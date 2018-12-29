@@ -4,6 +4,7 @@ use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Ytake\Hungrr\ServerRequestFactory;
 use type NazgHeredityTest\Middleware\MockMiddleware;
+use type NazgHeredityTest\Middleware\AsyncStubMiddleware;
 use type Facebook\HackTest\HackTest;
 use namespace HH\Lib\Experimental\IO;
 use function Facebook\FBExpect\expect;
@@ -26,15 +27,31 @@ final class HeredityTest extends HackTest {
   }
 
   public function testFunctionalMiddlewareStackRunner(): void {
+    $v = Vector{MockMiddleware::class, MockMiddleware::class};
     list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
-      new MiddlewareStack(Vector{MockMiddleware::class, MockMiddleware::class}),
+      new MiddlewareStack($v),
       new SimpleRequestHandler()
     );
     $response = $heredity->handle(
       $write,
       ServerRequestFactory::fromGlobals(),
     );
+    $decode = json_decode($read->rawReadBlocking());
+    expect(count($decode))->toBeSame(2);
+  }
+
+  public function testFunctionalAsyncMiddlewareStackRunner(): void {
+    $v = Vector{AsyncStubMiddleware::class, AsyncStubMiddleware::class};
+    list($read, $write) = IO\pipe_non_disposable();
+    $heredity = new Heredity(
+      new MiddlewareStack($v),
+      new SimpleRequestHandler()
+    );
+    $response = \HH\Asio\join($heredity->handleAsync(
+      $write,
+      ServerRequestFactory::fromGlobals(),
+    ));
     $decode = json_decode($read->rawReadBlocking());
     expect(count($decode))->toBeSame(2);
   }

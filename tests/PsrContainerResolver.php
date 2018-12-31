@@ -1,7 +1,7 @@
 <?hh // strict
 
 use type Psr\Container\ContainerInterface;
-use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;
 use type Nazg\Heredity\Resolvable;
 
@@ -18,11 +18,9 @@ class PsrContainerResolver implements Resolvable {
   ): MiddlewareInterface {
     if ($this->container->has($middleware)) {
       $instance = $this->container->get($middleware);
-      if ($instance is MiddlewareInterface) {
-        return $instance;
-      }
+      invariant($instance is MiddlewareInterface, "type error.");
+      return $instance;
     }
-
     throw new MiddlewareResolvingException(
       sprintf('Identifier "%s" is not binding.', $middleware),
     );

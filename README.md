@@ -26,7 +26,7 @@ hhvm $(which composer) require nazg/heredity
 ```hack
 <?hh // strict
 
-use type Ytake\HackHttpServer\RequestHandlerInterface;
+use type Nazg\Http\Server\RequestHandlerInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Ytake\Hungrr\Response;
@@ -36,19 +36,18 @@ use namespace HH\Lib\Experimental\IO;
 use function json_encode;
 
 final class SimpleRequestHandler implements RequestHandlerInterface {
-  
-  public function __construct(
-    private IO\WriteHandle $handle
-  ) {}
 
-  public function handle(ServerRequestInterface $request): ResponseInterface {
+  public function handle(
+    IO\WriteHandle $handle,
+    ServerRequestInterface $request
+  ): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);
     if (count($header)) {
-      $this->handle->rawWriteBlocking(json_encode($header));
-      return new Response($this->handle, StatusCode::OK);
+      $handle->rawWriteBlocking(json_encode($header));
+      return new Response($handle, StatusCode::OK);
     }
-    $this->handle->rawWriteBlocking(json_encode([]));
-    return new Response($this->handle, StatusCode::OK);
+    $handle->rawWriteBlocking(json_encode([]));
+    return new Response($handle, StatusCode::OK);
   }
 }
 ```
@@ -60,18 +59,19 @@ final class SimpleRequestHandler implements RequestHandlerInterface {
 
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
-use type Ytake\HackHttpServer\MiddlewareInterface;
-use type Ytake\HackHttpServer\RequestHandlerInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
+use type Nazg\Http\Server\RequestHandlerInterface;
+use type HH\Lib\Experimental\IO\WriteHandle;
 
 class SimpleMiddleware implements MiddlewareInterface {
 
   public function process(
+    WriteHandle $writeHandle,
     ServerRequestInterface $request,
     RequestHandlerInterface $handler,
   ): ResponseInterface {
     // ... do something and return response
-    // or call request handler:
-    // return $handler->handle($request);
+    return $handler->handle($writeHandle, $request);
   }
 }
 
@@ -92,9 +92,9 @@ $heredity = new Heredity(
     new MiddlewareStack([
       SimpleMiddleware::class
     ]),
-    new SimpleRequestHandler($write)
+    new SimpleRequestHandler()
   );
-$response = $heredity->process(ServerRequestFactory::fromGlobals());
+$response = $heredity->handle($write, ServerRequestFactory::fromGlobals());
 
 ```
 
@@ -106,7 +106,7 @@ example. [ytake/hh-container](https://github.com/ytake/hh-container)
 <?hh // strict
 
 use type Psr\Container\ContainerInterface;
-use type Ytake\HackHttpServer\MiddlewareInterface;
+use type Nazg\Http\Server\MiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;
 use type Nazg\Heredity\Resolvable;
 

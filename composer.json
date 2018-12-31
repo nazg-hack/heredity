@@ -31,7 +31,7 @@
     "hhvm/hacktest": "^1.3",
     "facebook/fbexpect": "^2.2.0",
     "hhvm/hhast": "^3.30.0",
-    "ytake/hungrr": "^0.2.0"
+    "ytake/hungrr": "^0.2.1"
   },
   "autoload": {
     "psr-4": {

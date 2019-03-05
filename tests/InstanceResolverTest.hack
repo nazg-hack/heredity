@@ -1,5 +1,3 @@
-<?hh // strict
-
 use type Nazg\Heredity\InstanceResolver;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Facebook\HackTest\HackTest;

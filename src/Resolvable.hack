@@ -1,5 +1,3 @@
-<?hh // strict
-
 /**
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -15,6 +13,13 @@
  * Copyright (c) 2017-2019 Yuuki Takezawa
  *
  */
-namespace Nazg\Heredity\Exception;
+namespace Nazg\Heredity;
 
-class MiddlewareResolvingException extends \LogicException {}
+use type Nazg\Http\Server\MiddlewareInterface;
+
+interface Resolvable {
+
+  public function resolve(
+    classname<MiddlewareInterface> $middleware
+  ): MiddlewareInterface;
+}

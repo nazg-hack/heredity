@@ -1,5 +1,3 @@
-<?hh // strict
-
 /**
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -17,11 +15,15 @@
  */
 namespace Nazg\Heredity;
 
+use type ReflectionClass;
 use type Nazg\Http\Server\MiddlewareInterface;
 
-interface Resolvable {
+class InstanceResolver implements Resolvable {
 
   public function resolve(
     classname<MiddlewareInterface> $middleware
-  ): MiddlewareInterface;
+  ): MiddlewareInterface {
+    $ref = new ReflectionClass($middleware);
+    return $ref->newInstance();
+  }
 }

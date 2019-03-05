@@ -1,5 +1,3 @@
-<?hh // strict
-
 /**
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -15,17 +13,6 @@
  * Copyright (c) 2017-2019 Yuuki Takezawa
  *
  */
-namespace Nazg\Heredity;
+namespace Nazg\Heredity\Exception;
 
-use type ReflectionClass;
-use type Nazg\Http\Server\MiddlewareInterface;
-
-class InstanceResolver implements Resolvable {
-
-  public function resolve(
-    classname<MiddlewareInterface> $middleware
-  ): MiddlewareInterface {
-    $ref = new ReflectionClass($middleware);
-    return $ref->newInstance();
-  }
-}
+final class MiddlewareNotFoundException extends \RuntimeException {}

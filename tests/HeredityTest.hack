@@ -1,5 +1,3 @@
-<?hh // strict
-
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Ytake\Hungrr\ServerRequestFactory;

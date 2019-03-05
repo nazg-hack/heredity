@@ -1,5 +1,3 @@
-<?hh // strict
-
 use type Nazg\Heredity\MiddlewareStack;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type NazgHeredityTest\Middleware\FakeMiddleware;

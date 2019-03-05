@@ -1,3 +1,4 @@
+# Auto detect text files and perform LF normalization
 * text=auto
 
 /.gitattributes export-ignore
@@ -6,5 +7,5 @@
 /.travis.sh export-ignore
 /composer.lock export-ignore
 /tests/ export-ignore
-/.hhconfig export-ignore
+.hhconfig export-ignore
 hhast-lint.json export-ignore

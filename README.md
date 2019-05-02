@@ -14,7 +14,7 @@ Supported Only Hack library.
 ## install
 
 ```bash
-hhvm $(which composer) require nazg/heredity
+$ composer require nazg/heredity
 ```
 
 ## Usage
@@ -24,8 +24,6 @@ hhvm $(which composer) require nazg/heredity
 #### 1. Example Simple Request Handler
 
 ```hack
-<?hh // strict
-
 use type Nazg\Http\Server\RequestHandlerInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
@@ -55,8 +53,6 @@ final class SimpleRequestHandler implements RequestHandlerInterface {
 #### 2. Creating Middleware
 
 ```hack
-<?hh // strict
-
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use type Nazg\Http\Server\MiddlewareInterface;
@@ -80,8 +76,6 @@ class SimpleMiddleware implements MiddlewareInterface {
 #### 3. Middleware
 
 ```hack
-<?hh // strict
-
 use type Nazg\Heredity\Heredity;
 use type Nazg\Heredity\MiddlewareStack;
 use type Ytake\Hungrr\ServerRequestFactory;
@@ -100,11 +94,9 @@ $response = $heredity->handle($write, ServerRequestFactory::fromGlobals());
 
 ### With Dependency Injection Container
 
-example. [ytake/hh-container](https://github.com/ytake/hh-container)
+example. [naz/hh-container](https://github.com/ytake/hh-container)
 
 ```hack
-<?hh // strict
-
 use type Psr\Container\ContainerInterface;
 use type Nazg\Http\Server\MiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;

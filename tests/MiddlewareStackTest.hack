@@ -8,7 +8,7 @@ final class MiddlewareStackTest extends HackTest {
 
   public function testStackShift(): void {
     $stack = new MiddlewareStack(
-      Vector{MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class},
+      vec[MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class],
     );
     expect($stack)->toBeInstanceOf(MiddlewareStack::class);
     expect($stack->isEmpty())->toBeFalse();
@@ -25,17 +25,17 @@ final class MiddlewareStackTest extends HackTest {
 
   public function testShouldReturnMiddlewareStackLayer(): void {
     $middlewares =
-      Vector{MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class};
+      vec[MockMiddleware::class, FakeMiddleware::class, FakeMiddleware::class];
     $stack = new MiddlewareStack($middlewares);
-    expect($stack->layer()->toVArray())->toBeSame($middlewares->toVArray());
+    expect($stack->layer())->toBeInstanceOf(ImmVector::class);
   }
 
   public function testShouldReturnSkipedMiddleware(): void {
-    $middlewares = Vector{
+    $middlewares = vec[
       MockMiddleware::class,
       FakeMiddleware::class,
       FakeMiddleware::class,
-    };
+    ];
     $stack = new MiddlewareStack($middlewares);
     $stack->cancel(0);
     expect($stack->layer()->toArray())->toNotBeSame($middlewares);

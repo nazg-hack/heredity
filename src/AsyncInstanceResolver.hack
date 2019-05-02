@@ -16,13 +16,13 @@
 namespace Nazg\Heredity;
 
 use type ReflectionClass;
-use type Nazg\Http\Server\MiddlewareInterface;
+use type Nazg\Http\Server\AsyncMiddlewareInterface;
 
-class InstanceResolver implements Resolvable<MiddlewareInterface> {
+class AsyncInstanceResolver implements Resolvable<AsyncMiddlewareInterface> {
 
   public function resolve(
-    classname<MiddlewareInterface> $middleware
-  ): MiddlewareInterface {
+    classname<AsyncMiddlewareInterface> $middleware
+  ): AsyncMiddlewareInterface {
     $ref = new ReflectionClass($middleware);
     return $ref->newInstance();
   }

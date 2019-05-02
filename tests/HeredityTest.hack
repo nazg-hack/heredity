@@ -11,7 +11,7 @@ final class HeredityTest extends HackTest {
   public function testFunctionalMiddlewareRunner(): void {
     list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
-      new MiddlewareStack(Vector{}),
+      new MiddlewareStack(vec[]),
       new SimpleRequestHandler()
     );
     $response = $heredity->handle(
@@ -24,7 +24,7 @@ final class HeredityTest extends HackTest {
   }
 
   public function testFunctionalMiddlewareStackRunner(): void {
-    $v = Vector{MockMiddleware::class, MockMiddleware::class};
+    $v = vec[MockMiddleware::class, MockMiddleware::class];
     list($read, $write) = IO\pipe_non_disposable();
     $heredity = new Heredity(
       new MiddlewareStack($v),

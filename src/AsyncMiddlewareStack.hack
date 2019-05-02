@@ -15,14 +15,14 @@
  */
 namespace Nazg\Heredity;
 
-use type Nazg\Http\Server\MiddlewareInterface;
+use type Nazg\Http\Server\AsyncMiddlewareInterface;
 use namespace HH\Lib\{Vec, C};
 
-class MiddlewareStack {
+class AsyncMiddlewareStack {
 
   public function __construct(
-    protected vec<classname<MiddlewareInterface>> $queue,
-    protected Resolvable<MiddlewareInterface> $resolver = new InstanceResolver(),
+    protected vec<classname<AsyncMiddlewareInterface>> $queue,
+    protected Resolvable<AsyncMiddlewareInterface> $resolver = new AsyncInstanceResolver(),
   ) {}
 
   <<__Rx>>
@@ -34,7 +34,7 @@ class MiddlewareStack {
     $this->queue = Vec\reverse($this->queue);
   }
 
-  public function shift(): MiddlewareInterface {
+  public function shift(): AsyncMiddlewareInterface {
     $index = C\last_keyx($this->queue);
     $middleware = $this->queue[$index];
     $this->queue = Vec\take($this->queue, $index);
@@ -44,11 +44,11 @@ class MiddlewareStack {
   }
 
   <<__Rx>>
-  public function layer(): ImmVector<classname<MiddlewareInterface>> {
+  public function layer(): ImmVector<classname<AsyncMiddlewareInterface>> {
     return new ImmVector($this->queue);
   }
 
-  public function cancel(int $index): vec<classname<MiddlewareInterface>> {
+  public function cancel(int $index): vec<classname<AsyncMiddlewareInterface>> {
     $this->queue = Vec\drop($this->queue, $index);
     return $this->queue;
   }

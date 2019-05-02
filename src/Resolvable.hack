@@ -15,11 +15,9 @@
  */
 namespace Nazg\Heredity;
 
-use type Nazg\Http\Server\MiddlewareInterface;
-
-interface Resolvable {
+interface Resolvable<T> {
 
   public function resolve(
-    classname<MiddlewareInterface> $middleware
-  ): MiddlewareInterface;
+    classname<T> $middleware
+  ): T;
 }

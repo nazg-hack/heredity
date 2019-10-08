@@ -97,30 +97,27 @@ $response = $heredity->handle($write, ServerRequestFactory::fromGlobals());
 example. [nazg-hack/glue](https://github.com/nazg-hack/glue)
 
 ```hack
-use type Psr\Container\ContainerInterface;
-use type Nazg\Http\Server\MiddlewareInterface;
+
+use namespace HH\Lib\Str;
+use type Nazg\Http\Server\AsyncMiddlewareInterface;
 use type Nazg\Heredity\Exception\MiddlewareResolvingException;
 use type Nazg\Heredity\Resolvable;
+use type Nazg\Glue\Container;
 
-use function sprintf;
-
-class PsrContainerResolver implements Resolvable {
+class GlueResolver implements Resolvable<AsyncMiddlewareInterface> {
 
   public function __construct(
-    protected ContainerInterface $container
+    protected Container $container
   ) {}
 
   public function resolve(
-    classname<MiddlewareInterface> $middleware
-  ): MiddlewareInterface {
+    classname<AsyncMiddlewareInterface> $middleware
+  ): AsyncMiddlewareInterface {
     if ($this->container->has($middleware)) {
-      $instance = $this->container->get($middleware);
-      if ($instance is MiddlewareInterface) {
-        return $instance;
-      }
+      return $this->container->get($middleware);
     }
     throw new MiddlewareResolvingException(
-      sprintf('Identifier "%s" is not binding.', $middleware),
+      Str\format('Identifier "%s" is not binding.', $middleware),
     );
   }
 }

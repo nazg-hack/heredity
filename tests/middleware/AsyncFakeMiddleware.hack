@@ -1,10 +1,11 @@
 namespace NazgHeredityTest\Middleware;
 
 use type HH\Lib\Experimental\IO\WriteHandle;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
-use type Nazg\Http\Server\AsyncMiddlewareInterface;
-use type Nazg\Http\Server\AsyncRequestHandlerInterface;
+use type Facebook\Experimental\Http\Message\{
+  ResponseInterface,
+  ServerRequestInterface,
+};
+use type Nazg\Http\Server\{AsyncMiddlewareInterface, AsyncRequestHandlerInterface};
 
 final class AsyncFakeMiddleware implements AsyncMiddlewareInterface {
 

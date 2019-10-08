@@ -1,6 +1,5 @@
 use type Nazg\Heredity\MiddlewareStack;
-use type NazgHeredityTest\Middleware\MockMiddleware;
-use type NazgHeredityTest\Middleware\FakeMiddleware;
+use type NazgHeredityTest\Middleware\{FakeMiddleware, MockMiddleware};
 use type Facebook\HackTest\HackTest;
 use function Facebook\FBExpect\expect;
 

@@ -6,7 +6,7 @@ Middleware Dispatcher For Hack.
 
 PSR-7 HTTP message library Not Supported.  
 Supported Only Hack library.  
-*Required HHVM >= 3.30.0*
+*Required HHVM >= 4.20.0*
 
 - [ytake/hungrr](https://github.com/ytake/hungrr)
 - [usox/hackttp](https://github.com/usox/hackttp)
@@ -94,7 +94,7 @@ $response = $heredity->handle($write, ServerRequestFactory::fromGlobals());
 
 ### With Dependency Injection Container
 
-example. [naz/hh-container](https://github.com/ytake/hh-container)
+example. [nazg-hack/glue](https://github.com/nazg-hack/glue)
 
 ```hack
 use type Psr\Container\ContainerInterface;

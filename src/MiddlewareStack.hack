@@ -16,7 +16,7 @@
 namespace Nazg\Heredity;
 
 use type Nazg\Http\Server\MiddlewareInterface;
-use namespace HH\Lib\{Vec, C};
+use namespace HH\Lib\{C, Vec};
 
 class MiddlewareStack {
 

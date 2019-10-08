@@ -1,5 +1,4 @@
-use type Nazg\Heredity\AsyncHeredity;
-use type Nazg\Heredity\AsyncMiddlewareStack;
+use type Nazg\Heredity\{AsyncHeredity, AsyncMiddlewareStack};
 use type Ytake\Hungrr\ServerRequestFactory;
 use type NazgHeredityTest\Middleware\AsyncMockMiddleware;
 use type Facebook\HackTest\HackTest;

@@ -16,7 +16,7 @@
 namespace Nazg\Heredity;
 
 use type Nazg\Http\Server\AsyncMiddlewareInterface;
-use namespace HH\Lib\{Vec, C};
+use namespace HH\Lib\{C, Vec};
 
 class AsyncMiddlewareStack {
 
@@ -48,7 +48,9 @@ class AsyncMiddlewareStack {
     return new ImmVector($this->queue);
   }
 
-  public function cancel(int $index): vec<classname<AsyncMiddlewareInterface>> {
+  public function cancel(
+    int $index
+  ): vec<classname<AsyncMiddlewareInterface>> {
     $this->queue = Vec\drop($this->queue, $index);
     return $this->queue;
   }

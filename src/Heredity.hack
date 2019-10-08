@@ -16,10 +16,11 @@
 namespace Nazg\Heredity;
 
 use type HH\Lib\Experimental\IO\WriteHandle;
-use type Nazg\Http\Server\RequestHandlerInterface;
-use type Nazg\Http\Server\MiddlewareInterface;
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Nazg\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
+use type Facebook\Experimental\Http\Message\{
+  ResponseInterface,
+  ServerRequestInterface,
+};
 
 <<__ConsistentConstruct>>
 class Heredity implements RequestHandlerInterface {

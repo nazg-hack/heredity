@@ -17,11 +17,15 @@ final class AsyncSimpleRequestHandler implements AsyncRequestHandlerInterface {
     $header = $request->getHeader(AsyncMockMiddleware::MOCK_HEADER);
     if (count($header)) {
       await $handle->writeAsync(json_encode($header));
-      await $handle->closeAsync();
+      if($handle is IO\NonDisposableHandle) {
+        await $handle->closeAsync();
+      }
       return new Response($handle, StatusCode::OK);
     }
     await $handle->writeAsync(json_encode([]));
-    await $handle->closeAsync();
+    if($handle is IO\NonDisposableHandle) {
+      await $handle->closeAsync();
+    }
     return new Response($handle, StatusCode::OK);
   }
 }

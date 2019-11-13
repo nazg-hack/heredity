@@ -8,12 +8,12 @@ use function Facebook\FBExpect\expect;
 final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareRunner(): void {
-    list($read, $write) = IO\pipe_non_disposable();
+    list($read, $write) = IO\pipe_nd();
     $heredity = new Heredity(
       new MiddlewareStack(vec[]),
       new SimpleRequestHandler()
     );
-    $response = $heredity->handle(
+    $_ = $heredity->handle(
       $write,
       ServerRequestFactory::fromGlobals($read),
     );
@@ -24,12 +24,12 @@ final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareStackRunner(): void {
     $v = vec[MockMiddleware::class, MockMiddleware::class];
-    list($read, $write) = IO\pipe_non_disposable();
+    list($read, $write) = IO\pipe_nd();
     $heredity = new Heredity(
       new MiddlewareStack($v),
       new SimpleRequestHandler()
     );
-    $response = $heredity->handle(
+    $_ = $heredity->handle(
       $write,
       ServerRequestFactory::fromGlobals(),
     );

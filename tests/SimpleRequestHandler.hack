@@ -19,7 +19,7 @@ final class SimpleRequestHandler implements RequestHandlerInterface {
       $handle->rawWriteBlocking(json_encode($header));
       return new Response($handle, StatusCode::OK);
     }
-    $handle->rawWriteBlocking(json_encode([]));
+    $handle->rawWriteBlocking(json_encode(dict[]));
     return new Response($handle, StatusCode::OK);
   }
 }

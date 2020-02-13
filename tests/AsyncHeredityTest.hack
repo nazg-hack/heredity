@@ -19,7 +19,7 @@ final class AsyncHeredityTest extends HackTest {
     );
     $content = await $read->readAsync();
     $decode = json_decode($content);
-    expect($decode)->toBeSame([]);
+    expect($decode)->toBeSame(dict[]);
   }
 
   public async function testFunctionalMiddlewareStackRunner(): Awaitable<void> {

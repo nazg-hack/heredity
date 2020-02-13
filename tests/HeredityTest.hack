@@ -19,7 +19,7 @@ final class HeredityTest extends HackTest {
     );
     $content = $read->rawReadBlocking();
     $decode = json_decode($content);
-    expect($decode)->toBeSame([]);
+    expect($decode)->toBeSame(dict[]);
   }
 
   public function testFunctionalMiddlewareStackRunner(): void {

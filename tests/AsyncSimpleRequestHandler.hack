@@ -22,7 +22,7 @@ final class AsyncSimpleRequestHandler implements AsyncRequestHandlerInterface {
       }
       return new Response($handle, StatusCode::OK);
     }
-    await $handle->writeAsync(json_encode([]));
+    await $handle->writeAsync(json_encode(dict[]));
     if($handle is IO\_Private\PipeWriteHandle) {
       await $handle->closeAsync();
     }

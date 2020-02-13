@@ -18,7 +18,7 @@ final class HeredityTest extends HackTest {
       ServerRequestFactory::fromGlobals($read),
     );
     $content = $read->rawReadBlocking();
-    $decode = json_decode($content);
+    $decode = json_decode($content, true, 512, \JSON_FB_HACK_ARRAYS);
     expect($decode)->toBeSame(dict[]);
   }
 

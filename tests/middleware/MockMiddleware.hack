@@ -5,14 +5,14 @@ use type Facebook\Experimental\Http\Message\{
   ServerRequestInterface,
 };
 use type Nazg\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
-use type HH\Lib\Experimental\IO\WriteHandle;
+use type HH\Lib\Experimental\IO\CloseableWriteHandle;
 
 final class MockMiddleware implements MiddlewareInterface {
 
   const string MOCK_HEADER = 'x-testing-call-count';
 
   public function process(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     ServerRequestInterface $request,
     RequestHandlerInterface $handler,
   ): ResponseInterface {

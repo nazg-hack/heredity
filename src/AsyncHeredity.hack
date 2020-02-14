@@ -15,7 +15,7 @@
  */
 namespace Nazg\Heredity;
 
-use type HH\Lib\Experimental\IO\WriteHandle;
+use type HH\Lib\Experimental\IO\CloseableWriteHandle;
 use type Nazg\Http\Server\{AsyncMiddlewareInterface, AsyncRequestHandlerInterface};
 use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
@@ -33,7 +33,7 @@ class AsyncHeredity implements AsyncRequestHandlerInterface {
   }
 
   public async function handleAsync(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     ServerRequestInterface $request
   ): Awaitable<ResponseInterface> {
     if ($this->stack->isEmpty()) {
@@ -46,7 +46,7 @@ class AsyncHeredity implements AsyncRequestHandlerInterface {
   }
 
   protected async function processorAsync(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     AsyncMiddlewareInterface $middleware,
     ServerRequestInterface $request
   ): Awaitable<ResponseInterface> {

@@ -15,7 +15,7 @@
  */
 namespace Nazg\Heredity;
 
-use type HH\Lib\Experimental\IO\WriteHandle;
+use type HH\Lib\Experimental\IO\CloseableWriteHandle;
 use type Nazg\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
@@ -33,7 +33,7 @@ class Heredity implements RequestHandlerInterface {
   }
 
   public function handle(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     ServerRequestInterface $request
   ): ResponseInterface {
     if ($this->stack->isEmpty()) {
@@ -46,7 +46,7 @@ class Heredity implements RequestHandlerInterface {
   }
 
   protected function processor(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     MiddlewareInterface $middleware,
     ServerRequestInterface $request
   ): ResponseInterface {

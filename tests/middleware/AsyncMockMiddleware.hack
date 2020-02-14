@@ -5,14 +5,14 @@ use type Facebook\Experimental\Http\Message\{
   ServerRequestInterface,
 };
 use type Nazg\Http\Server\{AsyncMiddlewareInterface, AsyncRequestHandlerInterface};
-use type HH\Lib\Experimental\IO\WriteHandle;
+use type HH\Lib\Experimental\IO\CloseableWriteHandle;
 
 final class AsyncMockMiddleware implements AsyncMiddlewareInterface {
 
   const string MOCK_HEADER = 'x-testing-call-count';
 
   public async function processAsync(
-    WriteHandle $writeHandle,
+    CloseableWriteHandle $writeHandle,
     ServerRequestInterface $request,
     AsyncRequestHandlerInterface $handler,
   ): Awaitable<ResponseInterface> {

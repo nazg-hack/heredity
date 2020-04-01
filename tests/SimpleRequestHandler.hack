@@ -5,7 +5,7 @@ use type Facebook\Experimental\Http\Message\{
 };
 use type Ytake\Hungrr\{Response, StatusCode};
 use type NazgHeredityTest\Middleware\MockMiddleware;
-use namespace HH\Lib\Experimental\IO;
+use namespace HH\Lib\IO;
 use function json_encode;
 
 final class SimpleRequestHandler implements RequestHandlerInterface {

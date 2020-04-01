@@ -5,7 +5,7 @@ use type Facebook\Experimental\Http\Message\{
   ServerRequestInterface,
 };
 use type Nazg\Http\Server\{AsyncMiddlewareInterface, AsyncRequestHandlerInterface};
-use type HH\Lib\Experimental\IO\CloseableWriteHandle;
+use type HH\Lib\IO\CloseableWriteHandle;
 
 final class AsyncMockMiddleware implements AsyncMiddlewareInterface {
 

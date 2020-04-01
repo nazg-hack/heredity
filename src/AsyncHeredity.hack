@@ -15,7 +15,7 @@
  */
 namespace Nazg\Heredity;
 
-use type HH\Lib\Experimental\IO\CloseableWriteHandle;
+use type HH\Lib\IO\CloseableWriteHandle;
 use type Nazg\Http\Server\{AsyncMiddlewareInterface, AsyncRequestHandlerInterface};
 use type Facebook\Experimental\Http\Message\{
   ResponseInterface,

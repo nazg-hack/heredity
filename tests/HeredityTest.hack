@@ -2,7 +2,7 @@ use type Nazg\Heredity\{Heredity, MiddlewareStack};
 use type Ytake\Hungrr\ServerRequestFactory;
 use type NazgHeredityTest\Middleware\MockMiddleware;
 use type Facebook\HackTest\HackTest;
-use namespace HH\Lib\Experimental\IO;
+use namespace HH\Lib\IO;
 use function Facebook\FBExpect\expect;
 
 final class HeredityTest extends HackTest {

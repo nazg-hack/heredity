@@ -16,10 +16,10 @@ final class SimpleRequestHandler implements RequestHandlerInterface {
   ): ResponseInterface {
     $header = $request->getHeader(MockMiddleware::MOCK_HEADER);
     if (count($header)) {
-      $handle->rawWriteBlocking(json_encode($header));
+      $handle->write(json_encode($header));
       return new Response($handle, StatusCode::OK);
     }
-    $handle->rawWriteBlocking(json_encode(dict[]));
+    $handle->write(json_encode(dict[]));
     return new Response($handle, StatusCode::OK);
   }
 }

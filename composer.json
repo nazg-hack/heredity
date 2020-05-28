@@ -20,7 +20,7 @@
     }
   ],
   "require": {
-    "hhvm": "^4.41",
+    "hhvm": "^4.58",
     "hhvm/hsl": "^4.0",
     "hhvm/hsl-experimental": "^4.25",
     "hhvm/hhvm-autoload": "^3.0",
@@ -31,7 +31,7 @@
     "hhvm/hacktest": "^2.0",
     "facebook/fbexpect": "^2.7",
     "hhvm/hhast": "^4.0",
-    "ytake/hungrr": "^0.10",
+    "ytake/hungrr": "^0.12",
     "nazg/glue": "^1.0"
   },
   "autoload": {

@@ -8,7 +8,7 @@ use function Facebook\FBExpect\expect;
 final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareRunner(): void {
-    list($read, $write) = IO\pipe_nd();
+    list($read, $write) = IO\pipe();
     $heredity = new Heredity(
       new MiddlewareStack(vec[]),
       new SimpleRequestHandler()
@@ -24,7 +24,7 @@ final class HeredityTest extends HackTest {
 
   public function testFunctionalMiddlewareStackRunner(): void {
     $v = vec[MockMiddleware::class, MockMiddleware::class];
-    list($read, $write) = IO\pipe_nd();
+    list($read, $write) = IO\pipe();
     $heredity = new Heredity(
       new MiddlewareStack($v),
       new SimpleRequestHandler()

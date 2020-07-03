@@ -18,13 +18,13 @@ final class AsyncSimpleRequestHandler implements AsyncRequestHandlerInterface {
     if (count($header)) {
       await $handle->writeAsync(json_encode($header));
       if($handle is IO\CloseableWriteHandle) {
-        await $handle->closeAsync();
+        $handle->close();
       }
       return new Response($handle, StatusCode::OK);
     }
     await $handle->writeAsync(json_encode(dict[]));
     if($handle is IO\CloseableWriteHandle) {
-      await $handle->closeAsync();
+      $handle->close();
     }
     return new Response($handle, StatusCode::OK);
   }

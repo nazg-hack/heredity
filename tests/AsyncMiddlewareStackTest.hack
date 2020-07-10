@@ -37,6 +37,6 @@ final class AsyncMiddlewareStackTest extends HackTest {
     ];
     $stack = new AsyncMiddlewareStack($middlewares);
     $stack->cancel(0);
-    expect($stack->layer()->toArray())->toNotBeSame($middlewares);
+    expect($stack->layer()->toVArray())->toNotBeSame($middlewares);
   }
 }

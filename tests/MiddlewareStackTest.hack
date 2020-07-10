@@ -37,6 +37,6 @@ final class MiddlewareStackTest extends HackTest {
     ];
     $stack = new MiddlewareStack($middlewares);
     $stack->cancel(0);
-    expect($stack->layer()->toArray())->toNotBeSame($middlewares);
+    expect($stack->layer()->toVArray())->toNotBeSame($middlewares);
   }
 }

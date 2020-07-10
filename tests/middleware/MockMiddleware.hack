@@ -16,7 +16,7 @@ final class MockMiddleware implements MiddlewareInterface {
     ServerRequestInterface $request,
     RequestHandlerInterface $handler,
   ): ResponseInterface {
-    $request = $request->withAddedHeader(self::MOCK_HEADER, vec["1"]);
+    $request = $request->withAddedHeader(self::MOCK_HEADER, vec['1']);
     return $handler->handle($writeHandle, $request);
   }
 }

@@ -16,7 +16,7 @@ final class AsyncMockMiddleware implements AsyncMiddlewareInterface {
     ServerRequestInterface $request,
     AsyncRequestHandlerInterface $handler,
   ): Awaitable<ResponseInterface> {
-    $request = $request->withAddedHeader(self::MOCK_HEADER, vec["1"]);
+    $request = $request->withAddedHeader(self::MOCK_HEADER, vec['1']);
     return await $handler->handleAsync($writeHandle, $request);
   }
 }

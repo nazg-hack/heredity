@@ -25,12 +25,11 @@ class AsyncMiddlewareStack {
     protected Resolvable<AsyncMiddlewareInterface> $resolver = new AsyncInstanceResolver(),
   ) {}
 
-  <<__Rx>>
-  public function isEmpty(): bool {
+  public function isEmpty()[rx]: bool {
     return C\is_empty($this->queue);
   }
 
-  public function reverse(): void {
+  public function reverse()[rx]: void {
     $this->queue = Vec\reverse($this->queue);
   }
 
@@ -43,14 +42,13 @@ class AsyncMiddlewareStack {
     );
   }
 
-  <<__Rx>>
-  public function layer(): ImmVector<classname<AsyncMiddlewareInterface>> {
+  public function layer()[rx]: ImmVector<classname<AsyncMiddlewareInterface>> {
     return new ImmVector($this->queue);
   }
 
   public function cancel(
     int $index
-  ): vec<classname<AsyncMiddlewareInterface>> {
+  )[rx]: vec<classname<AsyncMiddlewareInterface>> {
     $this->queue = Vec\drop($this->queue, $index);
     return $this->queue;
   }

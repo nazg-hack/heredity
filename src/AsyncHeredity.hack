@@ -49,7 +49,7 @@ class AsyncHeredity implements AsyncRequestHandlerInterface {
     CloseableWriteHandle $writeHandle,
     AsyncMiddlewareInterface $middleware,
     ServerRequestInterface $request
-  ): Awaitable<ResponseInterface> {
+  )[defaults]: Awaitable<ResponseInterface> {
     return await $middleware->processAsync($writeHandle, $request, $this);
   }
 }

@@ -49,7 +49,7 @@ class Heredity implements RequestHandlerInterface {
     CloseableWriteHandle $writeHandle,
     MiddlewareInterface $middleware,
     ServerRequestInterface $request
-  ): ResponseInterface {
+  )[defaults]: ResponseInterface {
     return $middleware->process($writeHandle, $request, $this);
   }
 }

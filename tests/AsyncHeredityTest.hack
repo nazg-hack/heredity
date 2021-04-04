@@ -17,7 +17,7 @@ final class AsyncHeredityTest extends HackTest {
       $write,
       ServerRequestFactory::fromGlobals($read),
     );
-    $content = await $read->readAsync();
+    $content = await $read->readAllAsync();
     $decode = json_decode($content, true, 512, \JSON_FB_HACK_ARRAYS);
     expect($decode)->toBeSame(dict[]);
   }
@@ -33,7 +33,7 @@ final class AsyncHeredityTest extends HackTest {
       $write,
       ServerRequestFactory::fromGlobals(),
     );
-    $content = await $read->readAsync();
+    $content = await $read->readAllAsync();
     $decode = json_decode($content);
     expect(count($decode))->toBeSame(2);
   }

@@ -25,12 +25,11 @@ class MiddlewareStack {
     protected Resolvable<MiddlewareInterface> $resolver = new InstanceResolver(),
   ) {}
 
-  <<__Rx>>
-  public function isEmpty(): bool {
+  public function isEmpty()[rx]: bool {
     return C\is_empty($this->queue);
   }
 
-  public function reverse(): void {
+  public function reverse()[rx]: void {
     $this->queue = Vec\reverse($this->queue);
   }
 
@@ -43,12 +42,11 @@ class MiddlewareStack {
     );
   }
 
-  <<__Rx>>
-  public function layer(): ImmVector<classname<MiddlewareInterface>> {
+  public function layer()[rx]: ImmVector<classname<MiddlewareInterface>> {
     return new ImmVector($this->queue);
   }
 
-  public function cancel(int $index): vec<classname<MiddlewareInterface>> {
+  public function cancel(int $index)[rx]: vec<classname<MiddlewareInterface>> {
     $this->queue = Vec\drop($this->queue, $index);
     return $this->queue;
   }

@@ -20,17 +20,17 @@
     }
   ],
   "require": {
-    "hhvm": "^4.62",
-    "hhvm/hsl": "^4.0",
-    "hhvm/hsl-experimental": "^4.25",
+    "hhvm": "^4.98",
+    "hhvm/hsl": "^4.94",
+    "hhvm/hsl-experimental": "^4.93",
     "hhvm/hhvm-autoload": "^3.0",
     "facebook/hack-http-request-response-interfaces": "^0.3",
     "nazg/http-server-request-handler": "^0.6"
   },
   "require-dev": {
-    "hhvm/hacktest": "^2.0",
+    "hhvm/hacktest": "^2.2.3",
     "facebook/fbexpect": "^2.7",
-    "hhvm/hhast": "^4.0",
+    "hhvm/hhast": "^4.100",
     "ytake/hungrr": "^0.13",
     "nazg/glue": "^1.0"
   },
